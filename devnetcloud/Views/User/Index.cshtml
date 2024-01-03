@@ -6,10 +6,19 @@
 
 @model IEnumerable<User>
 
+<a asp-controller="User" asp-action="Create">Create new user</a>
+
 <ul>
     @foreach(User u in Model)
     {
-        <li>@u.Email</li>
+        <li>
+            @u.Email
+            @u.Password
+        
+            <a asp-controller="User" asp-action="Update" asp-route-id="@u.Id">Update</a>
+            <a asp-controller="User" asp-action="Delete" asp-route-id="@u.Id">Delete</a>
+        </li>
+        
     }
 </ul>
 

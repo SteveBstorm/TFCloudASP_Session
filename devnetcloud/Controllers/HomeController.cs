@@ -8,17 +8,13 @@ namespace devnetcloud.Controllers
     {
     
 
-        public IActionResult Index(string id)
+        public IActionResult Index()
         {
-
-            Console.WriteLine(id);
             return View();
         }
 
-        public IActionResult Privacy(int rantanplan)
+        public IActionResult Privacy()
         {
-
-            Console.WriteLine(rantanplan);
             return View();
         }
     }

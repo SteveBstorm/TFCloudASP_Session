@@ -2,6 +2,11 @@
 {
     public class User
     {
+
+        public User()
+        {
+            
+        }
         public User(int id, string email, string password, string pseudo)
         {
             Id = id;
