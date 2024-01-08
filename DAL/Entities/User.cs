@@ -1,4 +1,4 @@
-﻿namespace devnetcloud.Models
+﻿namespace DAL.Entities
 {
     public class User
     {

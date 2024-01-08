@@ -1,9 +1,8 @@
 ﻿using BLL.Services;
-using devnetcloud.Context;
-using devnetcloud.Models;
-using devnetcloud.Models.Forms;
+using DAL.Context;
+using DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
-using System.Dynamic;
+using BLL.Forms;
 
 namespace devnetcloud.Controllers
 {
@@ -47,19 +46,9 @@ namespace devnetcloud.Controllers
         public IActionResult Create(RegisterForm form)
         {
 
-            _userService.Create();
-
             if (ModelState.IsValid) 
             {
-                User u = new User()
-                {
-                    Id = FakeDB.Users.Max(x => x.Id) + 1,
-                    Email = form.Email,
-                    Password = form.Password,
-                    Pseudo = form.Pseudo
-                };
-                FakeDB.Users.Add(u);
-                return RedirectToAction("Index");
+                _userService.Create(form);
             }
             return View();
         }

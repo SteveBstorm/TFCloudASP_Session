@@ -1,17 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DAL.Context;
+using DAL.Entities;
 
 namespace DAL.Repositories
 {
     public class UserRepository
     {
 
-        public bool Create()
+        public User Create(User user)
         {
-            return true;
+            int Id = FakeDB.Users.Max(x => x.Id) + 1;
+
+            user.Id = Id;
+
+            FakeDB.Users.Add(user);
+
+            return user;
+        }
+
+        public User? GetByEmail(string email)
+        {
+            User? u = FakeDB.Users.SingleOrDefault(x => x.Email == email);
+
+            return u;
         }
     }
 }

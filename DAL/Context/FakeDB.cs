@@ -1,6 +1,6 @@
-﻿using devnetcloud.Models;
+﻿using DAL.Entities;
 
-namespace devnetcloud.Context
+namespace DAL.Context
 {
     public static class FakeDB
     {

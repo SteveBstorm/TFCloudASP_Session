@@ -1,14 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace devnetcloud.Models.Forms
+namespace BLL.Forms
 {
-    public class RegisterForm
+    public class UpdatePasswordForm
     {
-        [EmailAddress]
-        [Required]
-        [MaxLength(50)]
-        public string Email { get; set; }
+        public int Id { get; set; }
 
+        public string OldPassword { get; set; }
 
         [Required]
         [MaxLength(30)]
@@ -18,8 +16,5 @@ namespace devnetcloud.Models.Forms
         [Compare("Password")]
         public string ConfirmationPassword { get; set; }
 
-
-        [MinLength(3)]
-        public string Pseudo { get; set; }
     }
 }

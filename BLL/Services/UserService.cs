@@ -1,4 +1,7 @@
-﻿using DAL.Repositories;
+﻿using BLL.Forms;
+using BLL.Mapper;
+using DAL.Entities;
+using DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +20,23 @@ namespace BLL.Services
             _userRepository = userRepository;
         }
 
-        public bool Create()
+        public User? Create(RegisterForm form)
         {
-            _userRepository.Create();
-            return true;
+            User? u = _userRepository.GetByEmail(form.Email);
+
+            if (u != null)
+            {
+                User user = _userRepository.Create(form.ToUser());
+                return user;
+            }
+
+            return null;
+            
+        }
+
+        public bool EmailAlreadyUsed(string email)
+        {
+            return _userRepository.GetByEmail(email) != null;
         }
 
     }
