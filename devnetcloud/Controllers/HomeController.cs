@@ -1,4 +1,5 @@
-﻿using devnetcloud.Models;
+﻿
+using devnetcloud.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -10,6 +11,7 @@ namespace devnetcloud.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 

@@ -1,4 +1,5 @@
-﻿using devnetcloud.Context;
+﻿using BLL.Services;
+using devnetcloud.Context;
 using devnetcloud.Models;
 using devnetcloud.Models.Forms;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,15 @@ namespace devnetcloud.Controllers
 {
     public class UserController : Controller
     {
+
+        private readonly UserService _userService;
+
+        public UserController(UserService userService)
+        {
+            _userService = userService;
+        }
+
+
         public IActionResult Index()
         {
             return View(FakeDB.Users);
@@ -36,6 +46,9 @@ namespace devnetcloud.Controllers
         [HttpPost]
         public IActionResult Create(RegisterForm form)
         {
+
+            _userService.Create();
+
             if (ModelState.IsValid) 
             {
                 User u = new User()

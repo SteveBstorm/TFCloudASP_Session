@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "devnetcloud", "devnetcloud\devnetcloud.csproj", "{DEED8EC1-E1F3-48B8-920E-CD5B065CEB3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "devnetcloud", "devnetcloud\devnetcloud.csproj", "{DEED8EC1-E1F3-48B8-920E-CD5B065CEB3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{33ACAD67-6569-4CCB-8A31-400190E658D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{D46D8878-2579-4B77-B10F-D93831C7FD8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{DEED8EC1-E1F3-48B8-920E-CD5B065CEB3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEED8EC1-E1F3-48B8-920E-CD5B065CEB3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEED8EC1-E1F3-48B8-920E-CD5B065CEB3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33ACAD67-6569-4CCB-8A31-400190E658D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33ACAD67-6569-4CCB-8A31-400190E658D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33ACAD67-6569-4CCB-8A31-400190E658D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33ACAD67-6569-4CCB-8A31-400190E658D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D46D8878-2579-4B77-B10F-D93831C7FD8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46D8878-2579-4B77-B10F-D93831C7FD8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46D8878-2579-4B77-B10F-D93831C7FD8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46D8878-2579-4B77-B10F-D93831C7FD8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
