@@ -39,5 +39,43 @@ namespace BLL.Services
             return _userRepository.GetByEmail(email) != null;
         }
 
+        public User? GetById(int id)
+        {
+            return _userRepository.GetById(id);
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return _userRepository.GetAll();
+        }
+
+        public bool UpdatePassword(UpdatePasswordForm form)
+        {
+            User? u = _userRepository.GetById(form.Id);
+
+            if (u != null)
+            {
+                if (u.Password == form.OldPassword)
+                {
+                    u.Password = form.Password;
+                    return _userRepository.Update(u);
+                }
+            }
+
+            return false;
+        }
+
+        public bool Delete(int id)
+        {
+            User? u = _userRepository.GetById(id);
+
+            if (u is not null)
+            {
+                return _userRepository.Delete(u);
+            }
+
+            return false;
+        }
+
     }
 }

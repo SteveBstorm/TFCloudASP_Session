@@ -23,5 +23,38 @@ namespace DAL.Repositories
 
             return u;
         }
+
+        public User? GetById(int id)
+        {
+            User? u = FakeDB.Users.Find(x => x.Id == id);
+
+            return u;
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            return FakeDB.Users;
+        }
+
+        public bool Update(User user)
+        {
+            User? u = FakeDB.Users.Find(x => x.Id == user.Id);
+
+            if (u != null)
+            {
+                u.Pseudo = user.Pseudo;
+                u.Email = user.Email;
+                u.Password = user.Password;
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool Delete(User user)
+        {
+            FakeDB.Users.Remove(user);
+            return true;
+        }
     }
 }

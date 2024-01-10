@@ -19,13 +19,13 @@ namespace devnetcloud.Controllers
 
         public IActionResult Index()
         {
-            return View(FakeDB.Users);
+            return View(_userService.GetAll());
         }
 
         public IActionResult Details(int id)
         {
 
-            User? u = FakeDB.Users.Find(x => x.Id == id);
+            User? u = _userService.GetById(id);
 
             if (u != null)
             {
@@ -67,23 +67,16 @@ namespace devnetcloud.Controllers
         [HttpPost]
         public IActionResult Update(UpdatePasswordForm form)
         {
-
-            Console.WriteLine(form.Id);
-
             if (ModelState.IsValid)
             {
-                User? u = FakeDB.Users.Find(x => x.Id == form.Id);
-                if (u != null)
-                {
-                    if (u.Password == form.OldPassword)
-                    {
-                        u.Password = form.Password;
-                        return RedirectToAction("Index");
-                    }
 
-                    ModelState.AddModelError("","Le Mot de passe actuel ne correspond pas.");
-                    
+                if (_userService.UpdatePassword(form))
+                {
+                    return RedirectToAction("Index");
                 }
+
+                ModelState.AddModelError("", "Le Mot de passe actuel ne correspond pas.");
+
             }
 
             return View();
@@ -92,14 +85,13 @@ namespace devnetcloud.Controllers
 
         public IActionResult Delete(int id)
         {
-            User? u = FakeDB.Users.Find(x => x.Id == id);
-
-            if (u is not null)
+            if (_userService.Delete(id))
             {
-                FakeDB.Users.Remove(u);
+                return RedirectToAction("Index");
             }
+            
+            return View("NotFound");
 
-            return RedirectToAction("Index");
         }
     }
 }
