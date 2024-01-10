@@ -25,9 +25,13 @@ namespace BLL.Services
         {
             User? u = _userRepository.GetByEmail(form.Email);
 
-            if (u != null)
+            if (u == null)
             {
-                User user = _userRepository.Create(form.ToUser());
+                User user = form.ToUser();
+
+                user.Password = BCrypt.Net.BCrypt.HashPassword(form.Password);
+
+                user = _userRepository.Create(user);
                 return user;
             }
 
@@ -56,9 +60,9 @@ namespace BLL.Services
 
             if (u != null)
             {
-                if (u.Password == form.OldPassword)
+                if (BCrypt.Net.BCrypt.Verify(form.OldPassword, u.Password))
                 {
-                    u.Password = form.Password;
+                    u.Password = BCrypt.Net.BCrypt.HashPassword(form.Password);
                     return _userRepository.Update(u);
                 }
             }

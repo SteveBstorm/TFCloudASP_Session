@@ -49,6 +49,7 @@ namespace devnetcloud.Controllers
             if (ModelState.IsValid) 
             {
                 _userService.Create(form);
+                return RedirectToAction("Index");
             }
             return View();
         }
