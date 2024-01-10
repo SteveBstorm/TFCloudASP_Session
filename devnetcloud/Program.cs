@@ -1,4 +1,5 @@
 using BLL.Services;
+using DAL.Interfaces;
 using DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<UserService>();
 
 
-builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 

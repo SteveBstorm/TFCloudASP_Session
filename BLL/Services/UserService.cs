@@ -1,6 +1,7 @@
 ﻿using BLL.Forms;
 using BLL.Mapper;
 using DAL.Entities;
+using DAL.Interfaces;
 using DAL.Repositories;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace BLL.Services
     public class UserService
     {
 
-        private readonly UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(UserRepository userRepository)
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

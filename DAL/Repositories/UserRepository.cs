@@ -1,9 +1,10 @@
 ﻿using DAL.Context;
 using DAL.Entities;
+using DAL.Interfaces;
 
 namespace DAL.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
 
         public User Create(User user)
