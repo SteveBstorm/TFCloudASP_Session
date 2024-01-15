@@ -18,7 +18,8 @@ namespace BLL.Mapper
                 Email = form.Email,
                 Id = 0,
                 Password = form.Password,
-                Pseudo = form.Pseudo
+                Pseudo = form.Pseudo,
+                ConfirmationPassword = form.ConfirmationPassword
             };
         }
 

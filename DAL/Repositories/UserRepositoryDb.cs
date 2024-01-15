@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class UserRepositoryDb : IUserRepository
+    public class UserRepositoryDb
     {
 
         private readonly string _connectionString;
@@ -21,7 +21,7 @@ namespace DAL.Repositories
 
 
         
-        public User Create(User user)
+        public void Create(User user)
         {
             using(SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -39,7 +39,7 @@ namespace DAL.Repositories
 
                     conn.Close();
 
-                    return user;
+                    //return user;
 
                 }
             }
@@ -171,6 +171,11 @@ namespace DAL.Repositories
                     return rowAffected == 1;
                 }
             }
+        }
+
+        public bool Update(UpdatePasswordDAL user)
+        {
+            throw new NotImplementedException();
         }
     }
 }

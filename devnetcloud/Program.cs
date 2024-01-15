@@ -1,6 +1,7 @@
 using BLL.Services;
 using DAL.Interfaces;
 using DAL.Repositories;
+using devnetcloud.Tools;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,9 +9,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<SessionManager>();
 
 
-builder.Services.AddScoped<IUserRepository, UserRepositoryDb>(x => new UserRepositoryDb(builder.Configuration.GetConnectionString("DevNetCloudDB")));
+//builder.Services.AddScoped<IUserRepository, UserRepositoryDb>(x => new UserRepositoryDb(builder.Configuration.GetConnectionString("DevNetCloudDB")));
+
+builder.Services.AddScoped<IUserRepository, UserRepositoryAPI>();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -26,6 +34,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

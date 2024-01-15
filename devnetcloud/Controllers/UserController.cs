@@ -3,6 +3,8 @@ using DAL.Context;
 using DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 using BLL.Forms;
+using devnetcloud.Models;
+using devnetcloud.Tools;
 
 namespace devnetcloud.Controllers
 {
@@ -10,16 +12,18 @@ namespace devnetcloud.Controllers
     {
 
         private readonly UserService _userService;
+        private readonly SessionManager _sessionManager;
 
-        public UserController(UserService userService)
+        public UserController(UserService userService, SessionManager sessionManager)
         {
             _userService = userService;
+            _sessionManager = sessionManager;
         }
 
-
+        [IsConnected]
         public IActionResult Index()
         {
-            return View(_userService.GetAll());
+            return View(_userService.GetAll(_sessionManager.Token));
         }
 
         public IActionResult Details(int id)
@@ -93,6 +97,23 @@ namespace devnetcloud.Controllers
             
             return View("NotFound");
 
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginForm form)
+        {
+            if (!ModelState.IsValid) return View(form);
+
+            string token = _userService.Login(form.Email, form.Password);
+
+            _sessionManager.Token = token;
+
+            return RedirectToAction("index");
         }
     }
 }

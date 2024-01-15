@@ -10,17 +10,18 @@ namespace DAL.Interfaces
     public interface IUserRepository
     {
 
-        public User Create(User user);
+        public void Create(User user);
 
         public User? GetByEmail(string email);
 
         public User? GetById(int id);
 
-        public IEnumerable<User> GetAll();
+        public IEnumerable<User> GetAll(string token);
 
-        public bool Update(User user);
+        public bool Update(UpdatePasswordDAL user);
 
         public bool Delete(User user);
+        public string Login(string email, string password);
 
     }
 }

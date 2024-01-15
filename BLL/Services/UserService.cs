@@ -21,7 +21,7 @@ namespace BLL.Services
             _userRepository = userRepository;
         }
 
-        public User? Create(RegisterForm form)
+        public void Create(RegisterForm form)
         {
             User? u = _userRepository.GetByEmail(form.Email);
 
@@ -29,13 +29,13 @@ namespace BLL.Services
             {
                 User user = form.ToUser();
 
-                user.Password = BCrypt.Net.BCrypt.HashPassword(form.Password);
+                //user.Password = BCrypt.Net.BCrypt.HashPassword(form.Password);
 
-                user = _userRepository.Create(user);
-                return user;
+                _userRepository.Create(user);
+                
             }
 
-            return null;
+            
             
         }
 
@@ -49,25 +49,34 @@ namespace BLL.Services
             return _userRepository.GetById(id);
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<User> GetAll(string token)
         {
-            return _userRepository.GetAll();
+            return _userRepository.GetAll(token);
         }
 
         public bool UpdatePassword(UpdatePasswordForm form)
         {
-            User? u = _userRepository.GetById(form.Id);
+            //User? u = _userRepository.GetById(form.Id);
 
-            if (u != null)
+            //if (u != null)
+            //{
+            //    if (BCrypt.Net.BCrypt.Verify(form.OldPassword, u.Password))
+            //    {
+            //        u.Password = BCrypt.Net.BCrypt.HashPassword(form.Password);
+            //        return _userRepository.Update(u);
+            //    }
+            //}
+            //u.Password = form.Password;
+
+            UpdatePasswordDAL u = new UpdatePasswordDAL()
             {
-                if (BCrypt.Net.BCrypt.Verify(form.OldPassword, u.Password))
-                {
-                    u.Password = BCrypt.Net.BCrypt.HashPassword(form.Password);
-                    return _userRepository.Update(u);
-                }
-            }
-
-            return false;
+                Id = form.Id,
+                Password = form.Password,
+                ConfirmationPassword = form.ConfirmationPassword,
+                OldPassword = form.OldPassword
+            };
+            return _userRepository.Update(u);
+            
         }
 
         public bool Delete(int id)
@@ -80,6 +89,11 @@ namespace BLL.Services
             }
 
             return false;
+        }
+
+        public string Login(string email, string password)
+        {
+            return _userRepository.Login(email, password);
         }
 
     }

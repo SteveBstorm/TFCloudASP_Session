@@ -4,10 +4,10 @@ using DAL.Interfaces;
 
 namespace DAL.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository
     {
 
-        public User Create(User user)
+        public void Create(User user)
         {
             int Id = FakeDB.Users.Max(x => x.Id) + 1;
 
@@ -15,7 +15,7 @@ namespace DAL.Repositories
 
             FakeDB.Users.Add(user);
 
-            return user;
+            //return user;
         }
 
         public User? GetByEmail(string email)
@@ -56,6 +56,11 @@ namespace DAL.Repositories
         {
             FakeDB.Users.Remove(user);
             return true;
+        }
+
+        public bool Update(UpdatePasswordDAL user)
+        {
+            throw new NotImplementedException();
         }
     }
 }
